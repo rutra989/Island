@@ -7,7 +7,7 @@ import organism.Animal_Type;
 import java.util.Map;
 @Getter
 @Setter
-public class Parametrs {
+public class Parameters {
     private int heightSize; // ширина массива
     private int lengthSize; //длина массива
     private int tickDuration; // длительность такта симуляции

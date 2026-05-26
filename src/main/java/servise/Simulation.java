@@ -5,13 +5,13 @@ import java.util.concurrent.Executors;
 import java.util.concurrent.ScheduledExecutorService;
 
 public class Simulation {
-    private Parametrs parametrs;
+    private Parameters parameters;
     private Island island;
     private ScheduledExecutorService scheduler = Executors.newScheduledThreadPool(5);
 
-    public Simulation(Parametrs parametrs) {
-        this.parametrs = parametrs;
-        this.island = new Island(parametrs);
+    public Simulation(Parameters parameters) {
+        this.parameters = parameters;
+        this.island = new Island(parameters);
     }
 
     public void start(){

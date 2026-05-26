@@ -1,12 +1,12 @@
 package island;
 
-import servise.Parametrs;
+import servise.Parameters;
 
 public class Island {
     private Location [][] locations;
         // создание объекта остров с инициализацией размера массива
-    public Island(Parametrs parametrs) {
-        this.locations = new Location[parametrs.getHeightSize()][parametrs.getLengthSize()];
+    public Island(Parameters parameters) {
+        this.locations = new Location[parameters.getHeightSize()][parameters.getLengthSize()];
     }
     // метод заполняет массив локациями - пока без заселения))
     public void init(){
