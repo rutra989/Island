@@ -21,7 +21,7 @@ public class Location {
         this.y = y;
     }
     //метод заполнения листов объектами организмов
-    public void AppendObjects(Organism organism){
+    public void appendObjects(Organism organism){
     if (organism instanceof Animal){
         listAnimals.add((Animal) organism);
     } else {
