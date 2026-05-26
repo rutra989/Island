@@ -1,6 +1,6 @@
-package Organism.Herbivore;
+package organism.herbivore;
 
-import Organism.Animal_Type;
+import organism.Animal_Type;
 
 public class Buffalo extends Herbivore{
     public Buffalo(Animal_Type animalType) {

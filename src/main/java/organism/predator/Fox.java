@@ -1,6 +1,6 @@
-package Organism.Predator;
+package organism.predator;
 
-import Organism.Animal_Type;
+import organism.Animal_Type;
 
 public class Fox extends Predator{
     public Fox(Animal_Type animalType) {

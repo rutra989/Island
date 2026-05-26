@@ -1,11 +1,11 @@
-package Organism;
+package organism;
 
 import lombok.Getter;
 
 @Getter
 public enum Animal_Type {
 
-
+    //Хар-ки животных
     BEAR(500, 5, 2, 80),
     BOA_SNAKE(15, 30, 1, 3),
     EAGLE(6, 20, 3, 1),
@@ -23,10 +23,10 @@ public enum Animal_Type {
     CATERPILLAR(0.01, 1000, 0, 0);
 
 
-    private final double maxWeight;
-    private final int maxCount;
-    private final int maxSpeed;
-    private final double maxFood;
+    private final double maxWeight; //вес одного животного
+    private final int maxCount; //макс. кол-во животных одного видв на клетке
+    private final int maxSpeed; //скорость перемещения, не более чем клеток за ход
+    private final double maxFood; //сколько пищи для полного насыщения
 
 
     Animal_Type(double maxWeight, int maxCount, int maxSpeed, double maxFood) {

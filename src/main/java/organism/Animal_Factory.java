@@ -1,10 +1,10 @@
-package Organism;
+package organism;
 
-import Organism.Herbivore.*;
-import Organism.Predator.*;
+import organism.herbivore.*;
+import organism.predator.*;
 
 public class Animal_Factory {
-
+    // фабричный метод создания объектов типов животных
     public Animal create(Animal_Type animalType) {
         return switch (animalType) {
             case BEAR -> new Bear(animalType);

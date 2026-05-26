@@ -1,8 +1,8 @@
-package Organism.Herbivore;
+package organism.herbivore;
 
-import Organism.Animal;
-import Organism.Organism;
-import Organism.Animal_Type;
+import organism.Animal;
+import organism.Organism;
+import organism.Animal_Type;
 
 public class Herbivore extends Animal {
 

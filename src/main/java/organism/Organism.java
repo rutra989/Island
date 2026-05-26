@@ -1,4 +1,4 @@
-package Organism;
+package organism;
 
 abstract public class Organism {
 

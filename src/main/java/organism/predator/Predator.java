@@ -1,8 +1,8 @@
-package Organism.Predator;
+package organism.predator;
 
-import Organism.Animal;
-import Organism.Organism;
-import Organism.Animal_Type;
+import organism.Animal;
+import organism.Organism;
+import organism.Animal_Type;
 
 public class Predator extends Animal {
 
