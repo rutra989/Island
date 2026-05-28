@@ -1,7 +1,8 @@
 package island;
 
+import lombok.Getter;
 import servise.Parameters;
-
+@Getter
 public class Island {
     private Location [][] locations;
         // создание объекта остров с инициализацией размера массива

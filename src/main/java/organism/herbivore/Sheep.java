@@ -3,7 +3,7 @@ package organism.herbivore;
 import organism.Animal_Type;
 
 public class Sheep extends Herbivore{
-    public Sheep(Animal_Type animalType) {
-        super(animalType);
+    public Sheep(int x, int y, Animal_Type animalType) {
+        super(x, y, animalType);
     }
 }
