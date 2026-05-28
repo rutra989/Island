@@ -2,6 +2,9 @@ package organism;
 
 import lombok.Getter;
 
+import java.util.HashMap;
+import java.util.Map;
+
 @Getter
 public enum Animal_Type {
 
@@ -27,7 +30,7 @@ public enum Animal_Type {
     private final int maxCount; //макс. кол-во животных одного видв на клетке
     private final int maxSpeed; //скорость перемещения, не более чем клеток за ход
     private final double maxFood; //сколько пищи для полного насыщения
-
+    private static final Map<Animal_Type, Map<Animal_Type, Integer>> probabilityOfEating = new HashMap<>();
 
     Animal_Type(double maxWeight, int maxCount, int maxSpeed, double maxFood) {
         this.maxWeight = maxWeight;
@@ -36,4 +39,13 @@ public enum Animal_Type {
         this.maxFood = maxFood;
     }
 
+    static {
+        probabilityOfEating.put(BEAR, Map.of(BOA_SNAKE, 80, HORSE,40, DEER, 80, RABBIT, 80,
+                MOUSE, 90, GOAT, 70, SHEEP, 70, HOG, 50, BUFFALO, 20, DUCK, 10));
+        probabilityOfEating.put(BOA_SNAKE, Map.of(FOX, 15, RABBIT,20, MOUSE, 40, DUCK,10));
+        probabilityOfEating.put(EAGLE,Map.of(FOX, 10, RABBIT,90, MOUSE, 90, DUCK,80));
+        probabilityOfEating.put(FOX, Map.of(RABBIT, 70, MOUSE, 90, DUCK,60, CATERPILLAR, 40));
+        probabilityOfEating.put(WOLF,Map.of(HORSE,10, DEER, 15, RABBIT,60,MOUSE,80, GOAT,60,SHEEP,70,
+                HOG,15,BUFFALO,10,DUCK,40));
+    }
     }
