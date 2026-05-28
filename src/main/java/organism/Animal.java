@@ -7,17 +7,17 @@ import lombok.Setter;
 @Getter
 @Setter
 public abstract class Animal extends Organism{
+
+//    private double currentWeight; //текущий вес
+    private int currentSpeed; // текущая скорость
     private int x; //местоположение животных
     private int y;
-    private double currentWeight; //текущий вес
-    private int currentSpeed; // текущая скорость
     private Animal_Type animalType;
 
     public Animal(int x, int y, Animal_Type animalType) {
+        super(animalType.getMaxWeight());
         this.x = x;
-        this.y = y;
-        this.currentWeight = animalType.getMaxWeight();
-        this.animalType = animalType;
+        this.y= y;
     }
 
     // метод приема пищи
@@ -26,11 +26,11 @@ public abstract class Animal extends Organism{
     public abstract void move(Location location);
     
     public  void tickHunger(){
-    currentWeight = currentWeight - currentWeight/4;
+    setCurrentWeight(getCurrentWeight() - animalType.getMaxWeight() * 0.25);
     }
 
     public boolean isDeath(){
-        return currentWeight<=0;
+        return getCurrentWeight()<=0;
     }
 
 }

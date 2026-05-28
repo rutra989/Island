@@ -8,7 +8,7 @@ import organism.Animal_Type;
 public class Herbivore extends Animal {
 
 
-    public Herbivore(int x, int y, Animal_Type animalType) {
+    protected Herbivore(int x, int y, Animal_Type animalType) {
         super(x, y, animalType);
     }
 

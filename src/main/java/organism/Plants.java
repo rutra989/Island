@@ -9,4 +9,7 @@ public class Plants extends Organism {
     private final int maxCount = 200;
 
 
+    public Plants() {
+        super(1.0);
+    }
 }
