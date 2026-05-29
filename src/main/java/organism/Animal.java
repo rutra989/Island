@@ -12,13 +12,13 @@ public abstract class Animal extends Organism{
     private int currentSpeed; // текущая скорость
     private int x; //местоположение животных
     private int y;
-    private Animal_Type animalType;
 
     public Animal(int x, int y, Animal_Type animalType) {
-        super(animalType.getMaxWeight());
+        super(animalType);
         this.x = x;
-        this.y= y;
+        this.y = y;
     }
+
 
     // метод приема пищи
     public abstract boolean eat(Organism organism);
@@ -26,7 +26,7 @@ public abstract class Animal extends Organism{
     public abstract void move(Location location);
     
     public  void tickHunger(){
-    setCurrentWeight(getCurrentWeight() - animalType.getMaxWeight() * 0.25);
+    setCurrentWeight(getCurrentWeight() - getAnimalType().getMaxWeight() * 0.25);
     }
 
     public boolean isDeath(){
