@@ -22,8 +22,10 @@ abstract public class Organism {
     public void reproduction(Organism organism){
 
     }
-    // метод смерти
-    public void death() {
 
+
+    // метод проверки смерти
+    public boolean isDead(){
+        return getCurrentWeight()<=0;
     }
 }

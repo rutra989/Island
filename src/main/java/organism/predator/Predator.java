@@ -20,7 +20,9 @@ public class Predator extends Animal {
         int chance = random.nextInt(100);
         int probability = Animal_Type.probabilityOfEating.get(this.getAnimalType()).get(organism.getAnimalType());
         if (probability >= chance){
-            setCurrentWeight(getCurrentWeight() + organism.getAnimalType().getMaxWeight());
+            setCurrentWeight(getCurrentWeight() + organism.getCurrentWeight());
+            organism.setCurrentWeight(0);
+            normalizeWeight();
             return true;
         }
         return false;

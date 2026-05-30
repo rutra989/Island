@@ -29,8 +29,12 @@ public abstract class Animal extends Organism{
     setCurrentWeight(getCurrentWeight() - getAnimalType().getMaxWeight() * 0.25);
     }
 
-    public boolean isDeath(){
-        return getCurrentWeight()<=0;
+    //метод проверки текущего веса к максимальному
+    public void normalizeWeight(){
+        if (getCurrentWeight() > getAnimalType().getMaxWeight()){
+            setCurrentWeight(getAnimalType().getMaxWeight());
+        }
     }
+
 
 }

@@ -4,6 +4,9 @@ import island.Location;
 import organism.Animal;
 import organism.Organism;
 import organism.Animal_Type;
+import organism.Plants;
+
+import java.util.concurrent.ThreadLocalRandom;
 
 public class Herbivore extends Animal {
 
@@ -14,7 +17,14 @@ public class Herbivore extends Animal {
 
     @Override
     public boolean eat(Organism organism) {
-    return false;
+        Plants plant = (Plants) organism;
+        if (getAnimalType().getMaxFood() < plant.getMaxWeight()) {
+            setCurrentWeight(getCurrentWeight() + getAnimalType().getMaxFood());
+            return true;
+        }
+        setCurrentWeight(getCurrentWeight() + plant.getMaxWeight());
+        normalizeWeight();
+        return true;
     }
 
     @Override
