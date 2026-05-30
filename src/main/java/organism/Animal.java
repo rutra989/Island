@@ -23,7 +23,10 @@ public abstract class Animal extends Organism{
     // метод приема пищи
     public abstract boolean eat(Organism organism);
     //метод движения
-    public abstract void move(Location location);
+    public void move(Location location){
+        this.x = location.getX();
+        this.y = location.getY();
+    }
     //метод голода
     public  void tickHunger(){
     setCurrentWeight(getCurrentWeight() - getAnimalType().getMaxWeight() * 0.25);
