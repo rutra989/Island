@@ -18,10 +18,7 @@ abstract public class Organism {
         this.currentWeight = animalType.getMaxWeight();
     }
 
-    // метод рождения
-    public void reproduction(Organism organism){
 
-    }
 
 
     // метод проверки смерти

@@ -5,7 +5,7 @@ import organism.predator.*;
 
 public class Animal_Factory {
     // фабричный метод создания объектов типов животных
-    public Animal create(int x, int y, Animal_Type animalType) {
+    public static Animal create(int x, int y, Animal_Type animalType) {
         return switch (animalType) {
             case BEAR -> new Bear(x, y, animalType);
             case BOA_SNAKE -> new Boa_Snake(x, y, animalType);

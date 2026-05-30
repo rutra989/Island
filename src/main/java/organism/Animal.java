@@ -22,14 +22,17 @@ public abstract class Animal extends Organism{
 
     // метод приема пищи
     public abstract boolean eat(Organism organism);
-
+    //метод движения
     public abstract void move(Location location);
-    
+    //метод голода
     public  void tickHunger(){
     setCurrentWeight(getCurrentWeight() - getAnimalType().getMaxWeight() * 0.25);
     }
-
-    //метод проверки текущего веса к максимальному
+    // метод рождения
+    public Animal reproduction(){
+    return Animal_Factory.create(x,y,getAnimalType());
+    }
+    //метод привидения текущего веса к максимальному в случаи переедания
     public void normalizeWeight(){
         if (getCurrentWeight() > getAnimalType().getMaxWeight()){
             setCurrentWeight(getAnimalType().getMaxWeight());
