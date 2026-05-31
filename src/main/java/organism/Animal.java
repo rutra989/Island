@@ -13,7 +13,7 @@ public abstract class Animal extends Organism{
     private int x; //местоположение животных
     private int y;
 
-    public Animal(int x, int y, Animal_Type animalType) {
+    public Animal(int x, int y, AnimalType animalType) {
         super(animalType);
         this.x = x;
         this.y = y;
@@ -33,7 +33,7 @@ public abstract class Animal extends Organism{
     }
     // метод рождения
     public Animal reproduction(){
-    return Animal_Factory.create(x,y,getAnimalType());
+    return AnimalFactory.create(x,y,getAnimalType());
     }
     //метод привидения текущего веса к максимальному в случаи переедания
     public void normalizeWeight(){

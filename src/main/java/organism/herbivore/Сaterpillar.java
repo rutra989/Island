@@ -1,10 +1,10 @@
 package organism.herbivore;
 
-import organism.Animal_Type;
+import organism.AnimalType;
 
 public class Сaterpillar extends Herbivore{
     //создание объекта через родительский конструктор
-    public Сaterpillar(int x, int y, Animal_Type animalType) {
-        super(x, y, animalType);
+    public Сaterpillar(int x, int y) {
+        super(x, y, AnimalType.CATERPILLAR);
     }
 }

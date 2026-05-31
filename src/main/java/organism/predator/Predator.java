@@ -3,14 +3,14 @@ package organism.predator;
 import island.Location;
 import organism.Animal;
 import organism.Organism;
-import organism.Animal_Type;
+import organism.AnimalType;
 
 import java.util.concurrent.ThreadLocalRandom;
 
 public class Predator extends Animal {
 
 
-    public Predator(int x, int y, Animal_Type animalType) {
+    public Predator(int x, int y, AnimalType animalType) {
         super(x, y, animalType);
     }
 
@@ -18,7 +18,7 @@ public class Predator extends Animal {
     public boolean eat(Organism organism) {
         ThreadLocalRandom random = ThreadLocalRandom.current();
         int chance = random.nextInt(100);
-        int probability = Animal_Type.probabilityOfEating.get(this.getAnimalType()).get(organism.getAnimalType());
+        int probability = AnimalType.probabilityOfEating.get(this.getAnimalType()).get(organism.getAnimalType());
         if (probability >= chance){
             setCurrentWeight(getCurrentWeight() + organism.getCurrentWeight());
             organism.setCurrentWeight(0);

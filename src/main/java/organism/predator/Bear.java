@@ -1,10 +1,10 @@
 package organism.predator;
 
-import organism.Animal_Type;
+import organism.AnimalType;
 
 public class Bear extends Predator{
 
-    public Bear(int x, int y, Animal_Type animalType) {
-        super(x, y, animalType);
+    public Bear(int x, int y) {
+        super(x, y, AnimalType.BEAR);
     }
 }

@@ -6,7 +6,7 @@ import java.util.HashMap;
 import java.util.Map;
 
 @Getter
-public enum Animal_Type {
+public enum AnimalType {
 
     //Хар-ки животных
     BEAR(500, 5, 2, 80),
@@ -30,9 +30,9 @@ public enum Animal_Type {
     private final int maxCount; //макс. кол-во животных одного видв на клетке
     private final int maxSpeed; //скорость перемещения, не более чем клеток за ход
     private final double maxFood; //сколько пищи для полного насыщения
-    public static final Map<Animal_Type, Map<Animal_Type, Integer>> probabilityOfEating = new HashMap<>();
+    public static final Map<AnimalType, Map<AnimalType, Integer>> probabilityOfEating = new HashMap<>();
 
-    Animal_Type(double maxWeight, int maxCount, int maxSpeed, double maxFood) {
+    AnimalType(double maxWeight, int maxCount, int maxSpeed, double maxFood) {
         this.maxWeight = maxWeight;
         this.maxCount = maxCount;
         this.maxSpeed = maxSpeed;

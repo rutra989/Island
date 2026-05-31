@@ -3,15 +3,13 @@ package organism.herbivore;
 import island.Location;
 import organism.Animal;
 import organism.Organism;
-import organism.Animal_Type;
+import organism.AnimalType;
 import organism.Plants;
-
-import java.util.concurrent.ThreadLocalRandom;
 
 public class Herbivore extends Animal {
 
 
-    protected Herbivore(int x, int y, Animal_Type animalType) {
+    protected Herbivore(int x, int y, AnimalType animalType) {
         super(x, y, animalType);
     }
 

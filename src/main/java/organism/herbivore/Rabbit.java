@@ -1,9 +1,9 @@
 package organism.herbivore;
 
-import organism.Animal_Type;
+import organism.AnimalType;
 
 public class Rabbit extends Herbivore{
-    public Rabbit(int x, int y, Animal_Type animalType) {
-        super(x, y, animalType);
+    public Rabbit(int x, int y) {
+        super(x, y, AnimalType.RABBIT);
     }
 }
