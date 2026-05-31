@@ -21,7 +21,7 @@ public class Location {
         this.x = x;
         this.y = y;
     }
-
+    // добавление животного
     public synchronized boolean addAnimal(Animal animal) {
         int count = 0;
         for (Animal animal1 : animals) {
@@ -35,12 +35,12 @@ public class Location {
         }
         return false;
     }
-
+    //удаление животного
     public synchronized void removeAnimal(Animal animal) {
         animals.remove(animal);
 
     }
-
+    // добавление растений
     public boolean addPlants(Plants plant) {
         if (plants.size() < plant.getMaxCount()) {
             plants.add(plant);
@@ -48,17 +48,8 @@ public class Location {
         }
         return false;
     }
-
+    // удаление растений
     public void removePlants(Plants plant) {
         plants.remove(plant);
     }
-    //метод заполнения листов объектами организмов
-//    public void appendObjects(Organism organism){
-//    if (organism instanceof Animal){
-//        listAnimals.add((Animal) organism);
-//    } else {
-//        listPlants.add((Plants) organism);
-//    }
-//    }
-
 }
