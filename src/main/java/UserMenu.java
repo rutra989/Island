@@ -11,6 +11,6 @@ public class UserMenu {
         Scanner scanner = new Scanner(System.in);
         MainMenu mainMenu = new MainMenu();
         mainMenu.simulationFactory();
-        mainMenu.initParameters();
+        mainMenu.initParameters(scanner);
     }
 }
