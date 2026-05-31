@@ -4,6 +4,9 @@ import organism.herbivore.*;
 import organism.predator.*;
 
 public class AnimalFactory {
+    private AnimalFactory() {
+    }
+
     // фабричный метод создания объектов типов животных
     public static Animal create(int x, int y, AnimalType animalType) {
         return switch (animalType) {
