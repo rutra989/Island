@@ -16,7 +16,7 @@ public class Island {
         init();
     }
 
-    // метод заполняет массив локациями - пока без заселения))
+    // метод заполняет массив локациями, без заселения))
     public void init() {
         for (int i = 0; i < locations.length; i++) {
             for (int j = 0; j < locations[i].length; j++) {
@@ -33,8 +33,8 @@ public class Island {
         return true;
     }
 
-    //метод передвижения
-    public void relocate(Animal animal, int x, int y) {
+    //метод передвижения(не верная логика выбора локации, исправить.)
+    public synchronized void relocate(Animal animal, int x, int y) {
         ThreadLocalRandom random = ThreadLocalRandom.current();
         int speed = random.nextInt(1,animal.getAnimalType().getMaxSpeed() + 1);
         do {

@@ -5,11 +5,13 @@ import lombok.Getter;
 @Getter
 public class Plants extends Organism {
     // хар-ки растений
-    private final double maxWeight = 1;
-    private final int maxCount = 200;
+    private static final double maxWeight = 1;
+    @Getter
+    private static final int maxCount = 200;
 
 
     public Plants() {
         super(1.0);
     }
+
 }

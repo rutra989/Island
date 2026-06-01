@@ -13,8 +13,8 @@ public class Location {
 
     private int x;
     private int y;
-    CopyOnWriteArrayList<Animal> animals = new CopyOnWriteArrayList<>();
-    CopyOnWriteArrayList<Plants> plants = new CopyOnWriteArrayList<>();
+    private CopyOnWriteArrayList<Animal> animals = new CopyOnWriteArrayList<>();
+    private CopyOnWriteArrayList<Plants> plants = new CopyOnWriteArrayList<>();
 
     //конструктор осоздания объекта по координатам
     public Location(int x, int y) {
