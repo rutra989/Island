@@ -56,13 +56,16 @@ public class LocationTask implements Callable<Statistic> {
     // метод симуляции рождения
     private void runReproduce(Location location, int currentTick) {
         for (Animal animal : location.getAnimals()) {
-            if (currentTick == animal.getLastReproduceTick()) {
+            // проверяем есть ли место и не участвовало ли животное в размножении
+            if (currentTick == animal.getLastReproduceTick() || !location.hasSpace(animal.getAnimalType())) {
                 continue;
             }
             for (Animal partner : location.getAnimals()) {
+                // зпроверка на самого себя
                 if (animal == partner) {
                     continue;
                 }
+                //если партнеры совпадают по типу
                 if (animal.getAnimalType() == partner.getAnimalType()) {
                     Animal newborn = animal.reproduction();
                     newborn.setLastReproduceTick(currentTick);

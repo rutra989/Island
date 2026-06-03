@@ -3,6 +3,7 @@ package island;
 import lombok.Getter;
 import lombok.Setter;
 import organism.Animal;
+import organism.AnimalType;
 import organism.Plants;
 
 import java.util.concurrent.CopyOnWriteArrayList;
@@ -22,19 +23,24 @@ public class Location {
         this.y = y;
     }
     // добавление животного
-    public synchronized boolean addAnimal(Animal animal) {
+    public synchronized void addAnimal(Animal animal) {
+            animals.add(animal);
+    }
+
+    // проверка места в клетке
+    public boolean hasSpace(AnimalType animalType){
         int count = 0;
-        for (Animal animal1 : animals) {
-            if (animal1.getAnimalType() == animal.getAnimalType()) {
+        for (Animal animal : animals){
+            if (animal.getAnimalType() == animalType){
                 count++;
             }
+            if (count == animalType.getMaxCount()){
+                return false;
+            }
         }
-        if (count < animal.getAnimalType().getMaxCount()) {
-            animals.add(animal);
-            return true;
-        }
-        return false;
+        return true;
     }
+
     //удаление животного
     public synchronized void removeAnimal(Animal animal) {
         animals.remove(animal);
