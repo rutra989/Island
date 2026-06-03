@@ -21,14 +21,14 @@ public class WorldPopulator {
                 int x = random.nextInt(island.getLocations().length); // выбираем рандомно координаты локации
                 int y = random.nextInt(island.getLocations()[0].length);
                 // создаем объект по указанным координатам в случае успешного добавления минусуем счетчик
-                if (island.getLocations()[x][y].addAnimal(AnimalFactory.create(x, y, list.getKey()))) {
+                if (island.getLocations()[x][y].hasSpace(list.getKey())) {
+                    island.getLocations()[x][y].addAnimal(AnimalFactory.create(x, y, list.getKey()));
                     count--;
                 }
                 // минусуем подстраховку в любом случае
                 maxAttempts--;
             }
         }
-
     }
 
     // метод создания популяции растений
