@@ -13,6 +13,8 @@ public abstract class Animal extends Organism{
     private int currentSpeed; // текущая скорость
     private int x; //местоположение животных
     private int y;
+    private long lastProcessedTick; // защита от повторной обработки
+    private long lastReproduceTick; // защита от повторного размножения
 
     public Animal(int x, int y, AnimalType animalType) {
         super(animalType);

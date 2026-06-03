@@ -18,7 +18,7 @@ public class Simulation {
     private Island island;
     private ScheduledExecutorService scheduler = Executors.newScheduledThreadPool(5);
     private List<LocationTask> taskList = new ArrayList<>();
-    private long currentTick=0;
+    private long currentTick=0; // номер текущего тика
 
     public Simulation(Parameters parameters, Island island) {
         this.parameters = parameters;
