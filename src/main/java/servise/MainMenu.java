@@ -35,7 +35,7 @@ public class MainMenu {
 
     // запуск симуляции.
     public void simulationFactory() {
-        Simulation simulation = new Simulation(parameters);
-        simulation.start();
+//        Simulation simulation = new Simulation(parameters);
+//        simulation.start();
     }
 }

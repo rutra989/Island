@@ -5,6 +5,7 @@ import lombok.Getter;
 @Getter
 public class Plants extends Organism {
     // хар-ки растений
+    @Getter
     private static final double maxWeight = 1;
     @Getter
     private static final int maxCount = 200;

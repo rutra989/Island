@@ -6,6 +6,8 @@ import organism.Organism;
 import organism.AnimalType;
 import organism.Plants;
 
+import java.util.concurrent.CopyOnWriteArrayList;
+
 public class Herbivore extends Animal {
 
 
@@ -15,18 +17,20 @@ public class Herbivore extends Animal {
 
     @Override
     public boolean eat(Organism organism) {
-        Plants plant = (Plants) organism;
-        if (getAnimalType().getMaxFood() < plant.getMaxWeight()) {
+        //проверка на случай если вес животного меньше веса растения
+        if (getAnimalType().getMaxFood() < Plants.getMaxWeight()) {
             setCurrentWeight(getCurrentWeight() + getAnimalType().getMaxFood());
             return true;
         }
-        setCurrentWeight(getCurrentWeight() + plant.getMaxWeight());
+        setCurrentWeight(getCurrentWeight() + Plants.getMaxWeight());
+        organism.setCurrentWeight(0);
         normalizeWeight();
         return true;
     }
 
     @Override
-    public void move(Location location) {
-
+    public CopyOnWriteArrayList<? extends Organism> getFoodList(Location location) {
+        return location.getPlants();
     }
+
 }

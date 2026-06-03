@@ -5,6 +5,7 @@ import organism.Animal;
 import organism.Organism;
 import organism.AnimalType;
 
+import java.util.concurrent.CopyOnWriteArrayList;
 import java.util.concurrent.ThreadLocalRandom;
 
 public class Predator extends Animal {
@@ -18,8 +19,11 @@ public class Predator extends Animal {
     public boolean eat(Organism organism) {
         ThreadLocalRandom random = ThreadLocalRandom.current();
         int chance = random.nextInt(100);
-        int probability = AnimalType.probabilityOfEating.get(this.getAnimalType()).get(organism.getAnimalType());
-        if (probability >= chance){
+        Integer probability = AnimalType.probabilityOfEating.get(this.getAnimalType()).get(organism.getAnimalType());
+        if (probability == null){
+            return false;
+        }
+        if (probability >= chance) {
             setCurrentWeight(getCurrentWeight() + organism.getCurrentWeight());
             organism.setCurrentWeight(0);
             normalizeWeight();
@@ -29,7 +33,9 @@ public class Predator extends Animal {
     }
 
     @Override
-    public void move(Location location) {
-
+    public CopyOnWriteArrayList<? extends Organism> getFoodList(Location location) {
+        return location.getAnimals();
     }
+
+
 }
