@@ -18,7 +18,8 @@ public class Simulation {
     private Island island;
     private ScheduledExecutorService scheduler = Executors.newScheduledThreadPool(5);
     private List<LocationTask> taskList = new ArrayList<>();
-    private long currentTick=0; // номер текущего тика
+    private long currentTick=1; // номер текущего тика
+
 
     public Simulation(Parameters parameters, Island island) {
         this.parameters = parameters;
@@ -27,14 +28,32 @@ public class Simulation {
     }
 
     //метод получения списка задач
-    public void task(){
+    public void task() {
+        int range = parameters.getLengthSize()/ parameters.getNumberOfThreads();
+        int startRow = 0;
+        for (int i = 0; i < parameters.getNumberOfThreads(); i++) {
+            int endRow = startRow + range - 1;
 
+            if (i == parameters.getNumberOfThreads() - 1 && parameters.getLengthSize() % parameters.getNumberOfThreads() != 0){
+                endRow = parameters.getLengthSize() - 1;
+            }
+            taskList.add(new LocationTask(island, startRow,endRow, currentTick));
+            startRow = endRow + 1;
+        }
     }
+
     // метод запуска симуляции
     public void start(){
+        WorldPopulator.populate(island);
+        while (!stop()){
+            task();
+        }
     }
     // условие остановки симуляции
-    public void stop(){
-
+    public boolean stop(){
+//        if (){
+//            parameters.isStopCondition() = false;
+//        }
+        return parameters.isStopCondition();
     }
 }

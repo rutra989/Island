@@ -13,7 +13,7 @@ public class Island {
 
     // создание объекта остров с инициализацией размера массива
     public Island(Parameters parameters) {
-        this.locations = new Location[parameters.getHeightSize()][parameters.getLengthSize()];
+        this.locations = new Location[parameters.getLengthSize()][parameters.getHeightSize()];
         init();
     }
 
