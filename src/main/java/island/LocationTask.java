@@ -6,24 +6,26 @@ import organism.Animal;
 import organism.Organism;
 import organism.Plants;
 
+import java.util.concurrent.Callable;
+
 @Getter
 @Setter
-public class LocationTask implements Runnable {
+public class LocationTask implements Callable<Void> {
     private Island island;
     private final int startRow;
     private final int endRow;
     private long currentTick;
 
-    public LocationTask(Island island, int startRow, int endRow, long currentTick) {
+    public LocationTask(Island island, int startRow, int endRow) {
         this.island = island;
         this.startRow = startRow;
         this.endRow = endRow;
-        this.currentTick = currentTick;
     }
 
     @Override
-    public void run() {
+    public Void call() throws Exception {
         runTick();
+        return null;
     }
 
     // метод симуляции еды
