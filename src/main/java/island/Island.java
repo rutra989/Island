@@ -2,6 +2,7 @@ package island;
 
 import lombok.Getter;
 import organism.Animal;
+import servise.Direction;
 import servise.Parameters;
 
 import java.util.concurrent.ThreadLocalRandom;
@@ -25,7 +26,7 @@ public class Island {
         }
     }
 
-    //метод по проверки границ
+    //метод для проверки границ
     public boolean inInside(int x, int y) {
         if (x > locations.length - 1 || y > locations[0].length - 1 || x < 0 || y < 0) {
             return false;
@@ -33,18 +34,25 @@ public class Island {
         return true;
     }
 
-    //метод передвижения(не верная логика выбора локации, исправить.)
-    public synchronized void relocate(Animal animal, int x, int y) {
+    //метод передвижения
+    public synchronized void relocate(Animal animal) {
         ThreadLocalRandom random = ThreadLocalRandom.current();
-        int speed = random.nextInt(1,animal.getAnimalType().getMaxSpeed() + 1);
-        do {
-            x = random.nextInt(animal.getX() - speed, (animal.getX() + speed) + 1);
-            y = random.nextInt(animal.getY() - speed, (animal.getY() + speed) + 1);
-        } while (!inInside(x, y));
+        int newX;
+        int newY;
+        //генерируем скорость перемещения
+        int speed = random.nextInt(1, animal.getAnimalType().getMaxSpeed() + 1);
 
-        if (locations[x][y].addAnimal(animal)) {
+        do {
+            //генерируем направление и задаем новые координаты и проверяем выход за границы
+            Direction direction = Direction.values()[random.nextInt(Direction.values().length)];
+            newX = animal.getX() + direction.getDx() * speed;
+            newY = animal.getY() + direction.getDy() * speed;
+        } while (!inInside(newX, newY));
+
+        if (locations[newX][newY].hasSpace(animal.getAnimalType())) {
+            locations[newX][newY].addAnimal(animal);
             locations[animal.getX()][animal.getY()].removeAnimal(animal);
-            animal.move(locations[x][y]);
+            animal.move(locations[newX][newY]);
         }
     }
 }
