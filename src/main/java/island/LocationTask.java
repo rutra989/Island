@@ -117,10 +117,10 @@ public class LocationTask implements Callable<Statistic> {
     }
 
     //метод симуляции тика
-    private void runTick(Island island) {
-        for (int i = 0; i < island.getLocations().length; i++) {
+    private void runTick(int currentTick) {
+        for (int i = startRow; i < endRow; i++) {
             for (int j = 0; j < island.getLocations()[i].length; j++) {
-
+            lifeCycle(island.getLocations()[i][j], currentTick);
             }
         }
 
