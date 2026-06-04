@@ -33,6 +33,7 @@ public class LocationTask implements Callable<Statistic> {
 
     // метод симуляции еды
     private void runEat(Location location) {
+        // подбираем животное потребителя
         for (Animal predator : location.getAnimals()) {
             if (predator.isDead()) {
                 continue;
@@ -41,12 +42,14 @@ public class LocationTask implements Callable<Statistic> {
                 continue;
             }
             boolean ate = false; // флаг для проверки поел или нет
+            // ищем жертву - это может быть и растение
             for (Organism prey : predator.getFoodList(location)) {
                 if (predator.eat(prey)) {
                     ate = true;
                     break;
                 }
             }
+            // если не поел, испытывает голод
             if (!ate) {
                 predator.tickHunger();
             }
@@ -61,11 +64,11 @@ public class LocationTask implements Callable<Statistic> {
                 continue;
             }
             for (Animal partner : location.getAnimals()) {
-                // зпроверка на самого себя
+                // проверка на самого себя
                 if (animal == partner) {
                     continue;
                 }
-                //если партнеры совпадают по типу
+                //если партнеры совпадают по типу - размножение
                 if (animal.getAnimalType() == partner.getAnimalType()) {
                     Animal newborn = animal.reproduction();
                     newborn.setLastReproduceTick(currentTick);
@@ -80,7 +83,15 @@ public class LocationTask implements Callable<Statistic> {
 
     //метод симуляции движения
     private void runMove(Location location, int currentTick) {
-
+    for (Animal animal : location.getAnimals()){
+        // проверили, что животное не перемещалось в рамках тика
+        if (currentTick == animal.getLastProcessedTick()){
+            continue;
+        }
+        //переместили
+        island.relocate(animal);
+        animal.setLastProcessedTick(currentTick);
+    }
     }
 
     //метод симуляции смерти
