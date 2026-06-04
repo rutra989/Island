@@ -5,30 +5,25 @@ import lombok.Setter;
 import organism.Animal;
 import organism.Organism;
 import organism.Plants;
-import organism.predator.Predator;
-import servise.Statistic;
-
-import java.util.concurrent.Callable;
-import java.util.concurrent.CopyOnWriteArrayList;
 
 @Getter
 @Setter
-public class LocationTask implements Callable<Statistic> {
+public class LocationTask implements Runnable {
     private Island island;
     private final int startRow;
     private final int endRow;
+    private long currentTick;
 
-    public LocationTask(Island island, int startRow, int endRow) {
+    public LocationTask(Island island, int startRow, int endRow, long currentTick) {
         this.island = island;
         this.startRow = startRow;
         this.endRow = endRow;
+        this.currentTick = currentTick;
     }
 
     @Override
-    public Statistic call() throws Exception {
-
-
-        return null;
+    public void run() {
+        runTick();
     }
 
     // метод симуляции еды
@@ -57,7 +52,7 @@ public class LocationTask implements Callable<Statistic> {
     }
 
     // метод симуляции рождения
-    private void runReproduce(Location location, int currentTick) {
+    private void runReproduce(Location location) {
         for (Animal animal : location.getAnimals()) {
             // проверяем есть ли место и не участвовало ли животное в размножении
             if (currentTick == animal.getLastReproduceTick() || !location.hasSpace(animal.getAnimalType())) {
@@ -82,7 +77,7 @@ public class LocationTask implements Callable<Statistic> {
     }
 
     //метод симуляции движения
-    private void runMove(Location location, int currentTick) {
+    private void runMove(Location location) {
     for (Animal animal : location.getAnimals()){
         // проверили, что животное не перемещалось в рамках тика
         if (currentTick == animal.getLastProcessedTick()){
@@ -109,18 +104,18 @@ public class LocationTask implements Callable<Statistic> {
     }
 
     //метод запуска жизни в клетке
-    private void lifeCycle(Location location, int currentTick) {
+    private void lifeCycle(Location location) {
         runEat(location);
         runDead(location);
-        runReproduce(location, currentTick);
-        runMove(location, currentTick);
+        runReproduce(location);
+        runMove(location);
     }
 
     //метод симуляции тика
-    private void runTick(int currentTick) {
+    private void runTick() {
         for (int i = startRow; i < endRow; i++) {
             for (int j = 0; j < island.getLocations()[i].length; j++) {
-            lifeCycle(island.getLocations()[i][j], currentTick);
+            lifeCycle(island.getLocations()[i][j]);
             }
         }
 
