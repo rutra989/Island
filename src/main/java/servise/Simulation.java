@@ -12,7 +12,6 @@ import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 import java.util.concurrent.ScheduledExecutorService;
 import java.util.concurrent.TimeUnit;
-import java.util.concurrent.atomic.AtomicLong;
 
 @Getter
 @Setter
@@ -22,7 +21,6 @@ public class Simulation {
     private ScheduledExecutorService scheduler;
     private ExecutorService threadPool;
     private List<LocationTask> taskList = new ArrayList<>();
-    private AtomicLong currentTick = new AtomicLong(0); // номер текущего тика
 
     public Simulation(Parameters parameters) {
         this.parameters = parameters;
@@ -51,16 +49,15 @@ public class Simulation {
         WorldPopulator.populate(island);
         task();
         scheduler.scheduleAtFixedRate(() -> {
-            currentTick.incrementAndGet();
-            for (LocationTask task : taskList) {
-                task.setCurrentTick(currentTick.get());
-            }
+            Statistic.getCurrentTick().incrementAndGet();
+            Statistic.reset();
             try {
                 threadPool.invokeAll(taskList);
             } catch (InterruptedException e) {
                 Thread.currentThread().interrupt();
                 System.out.println("Аварийное завершение симуляции.");
             }
+            Statistic.print();
             if (!stop()){
                 scheduler.shutdown();
             }
@@ -69,9 +66,6 @@ public class Simulation {
 
     // условие остановки симуляции
     public boolean stop() {
-//        if (){
-//            parameters.isStopCondition() = false;
-//        }
-        return parameters.isStopCondition();
+        return Statistic.getCurrentTick().get() >= parameters.getMaxTicks() || Statistic.getTotal().get() == 0;
     }
 }

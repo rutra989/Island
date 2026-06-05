@@ -20,6 +20,7 @@ public class Herbivore extends Animal {
         //проверка на случай если вес животного меньше веса растения
         if (getAnimalType().getMaxFood() < Plants.getMaxWeight()) {
             setCurrentWeight(getCurrentWeight() + getAnimalType().getMaxFood());
+            organism.setCurrentWeight(0);
             return true;
         }
         setCurrentWeight(getCurrentWeight() + Plants.getMaxWeight());

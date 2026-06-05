@@ -13,9 +13,11 @@ public class Parameters {
     private int heightSize; // ширина массива
     private int tickDuration; // длительность такта симуляции
     private int numberOfThreads = 5; // количество потоков
+
     private boolean stopCondition = true; // условие остановки симуляции
     private Map<AnimalType, Integer> countAnimals = new HashMap<>(); // начальное кол-во животных;
     private Map<AnimalType,Integer> numberCubs = new HashMap<>(); // количество детенышей
+    private int maxTicks; // максимальное количество тиков
     private static volatile Parameters instance;
 
     private Parameters() {

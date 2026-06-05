@@ -5,6 +5,7 @@ import lombok.Setter;
 import organism.Animal;
 import organism.Organism;
 import organism.Plants;
+import servise.Statistic;
 
 import java.util.concurrent.Callable;
 
@@ -14,7 +15,6 @@ public class LocationTask implements Callable<Void> {
     private Island island;
     private final int startRow;
     private final int endRow;
-    private long currentTick;
 
     public LocationTask(Island island, int startRow, int endRow) {
         this.island = island;
@@ -57,7 +57,7 @@ public class LocationTask implements Callable<Void> {
     private void runReproduce(Location location) {
         for (Animal animal : location.getAnimals()) {
             // проверяем есть ли место и не участвовало ли животное в размножении
-            if (currentTick == animal.getLastReproduceTick() || !location.hasSpace(animal.getAnimalType())) {
+            if (Statistic.getCurrentTick().get() == animal.getLastReproduceTick() || !location.hasSpace(animal.getAnimalType())) {
                 continue;
             }
             for (Animal partner : location.getAnimals()) {
@@ -68,10 +68,10 @@ public class LocationTask implements Callable<Void> {
                 //если партнеры совпадают по типу - размножение
                 if (animal.getAnimalType() == partner.getAnimalType()) {
                     Animal newborn = animal.reproduction();
-                    newborn.setLastReproduceTick(currentTick);
+                    newborn.setLastReproduceTick(Statistic.getCurrentTick().get());
                     location.addAnimal(newborn);
-                    animal.setLastReproduceTick(currentTick);
-                    partner.setLastReproduceTick(currentTick);
+                    animal.setLastReproduceTick(Statistic.getCurrentTick().get());
+                    partner.setLastReproduceTick(Statistic.getCurrentTick().get());
                     break;
                 }
             }
@@ -82,12 +82,12 @@ public class LocationTask implements Callable<Void> {
     private void runMove(Location location) {
     for (Animal animal : location.getAnimals()){
         // проверили, что животное не перемещалось в рамках тика
-        if (currentTick == animal.getLastProcessedTick()){
+        if (Statistic.getCurrentTick().get() == animal.getLastProcessedTick()){
             continue;
         }
         //переместили
         island.relocate(animal);
-        animal.setLastProcessedTick(currentTick);
+        animal.setLastProcessedTick(Statistic.getCurrentTick().get());
     }
     }
 
