@@ -95,6 +95,8 @@ public class LocationTask implements Callable<Void> {
     private void runDead(Location location) {
         for (Animal animal : location.getAnimals()) {
             if (animal.isDead()) {
+                Statistic.getDied().incrementAndGet();
+                Statistic.getTotal().decrementAndGet();
                 location.removeAnimal(animal);
             }
         }

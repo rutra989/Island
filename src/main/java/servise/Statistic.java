@@ -27,6 +27,6 @@ public class Statistic {
     // метод печати отчетастатистики
     public static void print() {
         System.out.printf("Тик: %d | Родилось: %d | Умерло: %d | Съедено: %d | Всего: %d%n",
-                currentTick, born.get(), died.get(), eaten.get(), total.get());
+                currentTick.get(), born.get(), died.get(), eaten.get(), total.get());
     }
 }

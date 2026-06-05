@@ -4,6 +4,7 @@ import island.Location;
 import organism.Animal;
 import organism.Organism;
 import organism.AnimalType;
+import servise.Statistic;
 
 import java.util.concurrent.CopyOnWriteArrayList;
 import java.util.concurrent.ThreadLocalRandom;
@@ -27,6 +28,7 @@ public class Predator extends Animal {
             setCurrentWeight(getCurrentWeight() + organism.getCurrentWeight());
             organism.setCurrentWeight(0);
             normalizeWeight();
+            Statistic.getEaten().incrementAndGet();
             return true;
         }
         return false;
