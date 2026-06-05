@@ -10,32 +10,54 @@ import java.util.Scanner;
 @Setter
 public class MainMenu {
     Parameters parameters = Parameters.getInstance();
+    Scanner scanner = new Scanner(System.in);
 
-    // установка параметров. (добавить валидацию, поменять логику метода)
-    public void initParameters(Scanner scanner) {
-        System.out.println("Введите длину острова, диапазон от 1 до 200");
+    // Метод установки размеров острова
+    public void setIslandSize() {
+        System.out.println("Укажите длину острова");
         parameters.setLengthSize(scanner.nextInt());
-        System.out.println("Введите ширину острова, диапазон от 1 до 200");
+        System.out.println("Укажите ширину острова");
         parameters.setHeightSize(scanner.nextInt());
-        System.out.println("Введите длительность такта симмуляции");
+    }
+
+    public void setTickDuration() {
+        System.out.println("Укажите длительность такта симмуляции");
         parameters.setTickDuration(scanner.nextInt());
-        System.out.println("Введите количество животных на старте");
-        for (AnimalType animal : AnimalType.values()){
+    }
+
+    // метод установки количества животных на старте симуляции
+    public void setAnimalCount() {
+        System.out.println("Укажите количество животных на старте");
+        for (AnimalType animal : AnimalType.values()) {
             System.out.println(animal);
             int animalNumber = scanner.nextInt();
             parameters.getCountAnimals().put(animal, animalNumber);
         }
-        System.out.println("Введите допустимое количество детенышей");
-        for (AnimalType animal : AnimalType.values()){
+    }
+
+    // метод установки кол-ва детенышей
+    public void setCubsCount() {
+        System.out.println("Укажите допустимое количество детенышей");
+        for (AnimalType animal : AnimalType.values()) {
             System.out.println(animal);
             int cubsNumber = scanner.nextInt();
             parameters.getNumberCubs().put(animal, cubsNumber);
         }
+
+    }
+
+    // метод печати пользовательского меню
+    public void printUserMenu() {
+        System.out.println("1. Задать размер острова.");
+        System.out.println("2. Задать количкство животных.");
+        System.out.println("3. Задать длительность тика.");
+        System.out.println("4. Запустить симуляцию.");
+
     }
 
     // запуск симуляции.
     public void simulationFactory() {
-//        Simulation simulation = new Simulation(parameters);
-//        simulation.start();
+        Simulation simulation = new Simulation(parameters);
+        simulation.start();
     }
 }

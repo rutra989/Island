@@ -8,8 +8,10 @@ import lombok.Setter;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 import java.util.concurrent.ScheduledExecutorService;
+import java.util.concurrent.TimeUnit;
 import java.util.concurrent.atomic.AtomicLong;
 
 @Getter
@@ -18,13 +20,15 @@ public class Simulation {
     private Parameters parameters;
     private Island island;
     private ScheduledExecutorService scheduler;
+    private ExecutorService threadPool;
     private List<LocationTask> taskList = new ArrayList<>();
     private AtomicLong currentTick = new AtomicLong(0); // номер текущего тика
 
-    public Simulation(Parameters parameters, Island island) {
+    public Simulation(Parameters parameters) {
         this.parameters = parameters;
-        this.island = island;
-        this.scheduler = Executors.newScheduledThreadPool(getParameters().getNumberOfThreads());
+        this.island = new Island(parameters);
+        this.scheduler = Executors.newScheduledThreadPool(1);
+        this.threadPool = Executors.newFixedThreadPool(getParameters().getNumberOfThreads());
     }
 
     //метод получения списка задач
@@ -43,16 +47,24 @@ public class Simulation {
     }
 
     // метод запуска симуляции
-    public void start() throws InterruptedException {
+    public void start(){
         WorldPopulator.populate(island);
         task();
-        while (!stop()) {
+        scheduler.scheduleAtFixedRate(() -> {
             currentTick.incrementAndGet();
             for (LocationTask task : taskList) {
                 task.setCurrentTick(currentTick.get());
             }
-            scheduler.invokeAll(taskList);
-        }
+            try {
+                threadPool.invokeAll(taskList);
+            } catch (InterruptedException e) {
+                Thread.currentThread().interrupt();
+                System.out.println("Аварийное завершение симуляции.");
+            }
+            if (!stop()){
+                scheduler.shutdown();
+            }
+        }, 0 , parameters.getTickDuration(), TimeUnit.SECONDS);
     }
 
     // условие остановки симуляции
