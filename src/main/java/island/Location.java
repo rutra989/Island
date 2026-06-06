@@ -43,11 +43,7 @@ public class Location {
 
     //вычисляем количестово свободного места в клетке  для растений
     public int freeSpacePlants(){
-        int count = 0;
-        for (Plants plant : plants){
-            count++;
-        }
-        return Plants.getMaxCount() - count;
+        return Plants.getMaxCount() - plants.size();
     }
 
     //удаление животного
@@ -56,12 +52,10 @@ public class Location {
 
     }
     // добавление растений
-    public boolean addPlants(Plants plant) {
-        if (plants.size() < plant.getMaxCount()) {
+    public void addPlants(Plants plant) {
+        if (plants.size() < Plants.getMaxCount()) {
             plants.add(plant);
-            return true;
         }
-        return false;
     }
     // удаление растений
     public void removePlants(Plants plant) {
