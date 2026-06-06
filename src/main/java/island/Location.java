@@ -27,7 +27,7 @@ public class Location {
             animals.add(animal);
     }
 
-    // проверка места в клетке
+    // проверка места в клетке ждя животных
     public boolean hasSpace(AnimalType animalType){
         int count = 0;
         for (Animal animal : animals){
@@ -39,6 +39,15 @@ public class Location {
             }
         }
         return true;
+    }
+
+    //вычисляем количестово свободного места в клетке  для растений
+    public int freeSpacePlants(){
+        int count = 0;
+        for (Plants plant : plants){
+            count++;
+        }
+        return Plants.getMaxCount() - count;
     }
 
     //удаление животного

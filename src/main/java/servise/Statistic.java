@@ -7,15 +7,15 @@ import java.util.concurrent.atomic.AtomicLong;
 
 public class Statistic {
     @Getter
-    private static AtomicInteger eaten = new AtomicInteger(0); // счетчик съеденого
+    private final static AtomicInteger eaten = new AtomicInteger(0); // счетчик съеденого
     @Getter
-    private static AtomicInteger died = new AtomicInteger(0); // счетчик умерло
+    private final static AtomicInteger died = new AtomicInteger(0); // счетчик умерло
     @Getter
-    private static AtomicInteger born = new AtomicInteger(0); // счетчик рождено
+    private final static AtomicInteger born = new AtomicInteger(0); // счетчик рождено
     @Getter
-    private static AtomicInteger total = new AtomicInteger(0); // счетчик всего
+    private final static AtomicInteger total = new AtomicInteger(0); // счетчик всего
     @Getter
-    private static AtomicLong currentTick = new AtomicLong(0);
+    private final static AtomicLong currentTick = new AtomicLong(0);
     private Statistic() {
     }
     //метод сброса счетчиков

@@ -8,6 +8,7 @@ import organism.Plants;
 import servise.Statistic;
 
 import java.util.concurrent.Callable;
+import java.util.concurrent.ThreadLocalRandom;
 
 @Getter
 @Setter
@@ -80,15 +81,15 @@ public class LocationTask implements Callable<Void> {
 
     //метод симуляции движения
     private void runMove(Location location) {
-    for (Animal animal : location.getAnimals()){
-        // проверили, что животное не перемещалось в рамках тика
-        if (Statistic.getCurrentTick().get() == animal.getLastProcessedTick()){
-            continue;
+        for (Animal animal : location.getAnimals()) {
+            // проверили, что животное не перемещалось в рамках тика
+            if (Statistic.getCurrentTick().get() == animal.getLastProcessedTick()) {
+                continue;
+            }
+            //переместили
+            island.relocate(animal);
+            animal.setLastProcessedTick(Statistic.getCurrentTick().get());
         }
-        //переместили
-        island.relocate(animal);
-        animal.setLastProcessedTick(Statistic.getCurrentTick().get());
-    }
     }
 
     //метод симуляции смерти
@@ -107,19 +108,37 @@ public class LocationTask implements Callable<Void> {
         }
     }
 
+    //метод возобнавления растений
+    private void runGrowPlants() {
+        ThreadLocalRandom random = ThreadLocalRandom.current();
+        for (int i = 0; i < island.getLocations().length; i++) {
+            for (int j = 0; j < island.getLocations()[i].length; j++) {
+                // ененрируем случайное число от количества свободного места
+                int count = random.nextInt(island.getLocations()[i][j].freeSpacePlants() + 1);
+                // создает растения в количестве сгенерировано числа
+                while (count != 0) {
+                    // создаем объект по указанным координатам
+                    island.getLocations()[i][j].addPlants(new Plants());
+                    count--;
+                }
+            }
+        }
+    }
+
     //метод запуска жизни в клетке
     private void lifeCycle(Location location) {
         runEat(location);
         runDead(location);
         runReproduce(location);
         runMove(location);
+        runGrowPlants();
     }
 
     //метод симуляции тика
     private void runTick() {
         for (int i = startRow; i < endRow; i++) {
             for (int j = 0; j < island.getLocations()[i].length; j++) {
-            lifeCycle(island.getLocations()[i][j]);
+                lifeCycle(island.getLocations()[i][j]);
             }
         }
 

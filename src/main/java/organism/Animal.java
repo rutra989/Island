@@ -10,7 +10,6 @@ import java.util.concurrent.CopyOnWriteArrayList;
 @Setter
 public abstract class Animal extends Organism{
 
-    private int currentSpeed; // текущая скорость
     private int x; //местоположение животных
     private int y;
     private long lastProcessedTick; // защита от повторной обработки
@@ -53,9 +52,6 @@ public abstract class Animal extends Organism{
 
     // метод проверки на голод
     public boolean isHungry(){
-        if (getCurrentWeight() < (getAnimalType().getMaxWeight() * 0.7)){
-            return true;
-        }
-        return false;
+        return getCurrentWeight() < (getAnimalType().getMaxWeight() * 0.7);
     }
 }
