@@ -58,7 +58,7 @@ public class Simulation {
                 System.out.println("Аварийное завершение симуляции.");
             }
             Statistic.print();
-            if (!stop()){
+            if (stop()){
                 scheduler.shutdown();
             }
         }, 0 , parameters.getTickDuration(), TimeUnit.SECONDS);

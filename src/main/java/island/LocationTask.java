@@ -37,20 +37,15 @@ public class LocationTask implements Callable<Void> {
                 continue;
             }
             if (!predator.isHungry()) { // проверка на голод
+                predator.tickHunger();
                 continue;
             }
-            boolean ate = false; // флаг для проверки поел или нет
             // ищем жертву - это может быть и растение
             for (Organism prey : predator.getFoodList(location)) {
-                if (predator.eat(prey)) {
-                    ate = true;
+                predator.eat(prey);
                     break;
-                }
             }
-            // если не поел, испытывает голод
-            if (!ate) {
                 predator.tickHunger();
-            }
         }
     }
 
@@ -82,6 +77,9 @@ public class LocationTask implements Callable<Void> {
     //метод симуляции движения
     private void runMove(Location location) {
         for (Animal animal : location.getAnimals()) {
+            if (animal.getAnimalType().getMaxSpeed() == 0){
+                continue;
+            }
             // проверили, что животное не перемещалось в рамках тика
             if (Statistic.getCurrentTick().get() == animal.getLastProcessedTick()) {
                 continue;

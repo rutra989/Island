@@ -35,7 +35,7 @@ public abstract class Animal extends Organism{
 
     //метод испытания голода
     public  void tickHunger(){
-    setCurrentWeight(getCurrentWeight() - getAnimalType().getMaxWeight() * 0.25);
+    setCurrentWeight(getCurrentWeight() - getAnimalType().getMaxWeight() * 0.3);
     }
 
     // метод рождения

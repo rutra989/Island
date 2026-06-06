@@ -28,7 +28,7 @@ public class Location {
     }
 
     // проверка места в клетке ждя животных
-    public boolean hasSpace(AnimalType animalType){
+    public synchronized boolean hasSpace(AnimalType animalType){
         int count = 0;
         for (Animal animal : animals){
             if (animal.getAnimalType() == animalType){
@@ -42,7 +42,7 @@ public class Location {
     }
 
     //вычисляем количестово свободного места в клетке  для растений
-    public int freeSpacePlants(){
+    public synchronized int freeSpacePlants(){
         return Plants.getMaxCount() - plants.size();
     }
 
@@ -52,13 +52,13 @@ public class Location {
 
     }
     // добавление растений
-    public void addPlants(Plants plant) {
+    public synchronized void addPlants(Plants plant) {
         if (plants.size() < Plants.getMaxCount()) {
             plants.add(plant);
         }
     }
     // удаление растений
-    public void removePlants(Plants plant) {
+    public synchronized void removePlants(Plants plant) {
         plants.remove(plant);
     }
 }
