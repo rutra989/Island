@@ -63,9 +63,16 @@ public class LocationTask implements Callable<Void> {
             AnimalType type = animal.getAnimalType(); // получаем тип животного
             int born =  location.getBornThisTick().getOrDefault(type, 0); // получаем количество рожденных животных
             int limit = Parameters.getInstance().getNumberCubs().get(type); //получаем установленный лимит на новорожденных
-            // проверяем есть ли место, не участвовало ли животное в размножении, и не превышен ли лимит на новорожденных
-            if (Statistic.getCurrentTick().get() == animal.getLastReproduceTick() ||
-                    !location.hasSpace(type) || born >= limit) {
+            // проверяем есть ли место
+            if (Statistic.getCurrentTick().get() == animal.getLastReproduceTick().get()) {
+                continue;
+            }
+            //участвовало ли животное в размножении
+            if (!location.hasSpace(type)){
+                continue;
+            }
+            //не превышен ли лимит на новорожденных
+            if (born >= limit){
                 continue;
             }
             //  подбираем партнера
@@ -80,10 +87,10 @@ public class LocationTask implements Callable<Void> {
                     location.getBornThisTick().put(type, location.getBornThisTick().getOrDefault(type, 0) + 1);
                     // процесс рождения
                     Animal newborn = animal.reproduction();
-                    newborn.setLastReproduceTick(Statistic.getCurrentTick().get());
+                    newborn.getLastReproduceTick().set(Statistic.getCurrentTick().get());
                     location.addAnimal(newborn);
-                    animal.setLastReproduceTick(Statistic.getCurrentTick().get());
-                    partner.setLastReproduceTick(Statistic.getCurrentTick().get());
+                    animal.getLastReproduceTick().set(Statistic.getCurrentTick().get());
+                    partner.getLastReproduceTick().set(Statistic.getCurrentTick().get());
                     break;
                 }
             }
@@ -97,12 +104,12 @@ public class LocationTask implements Callable<Void> {
                 continue;
             }
             // проверили, что животное не перемещалось в рамках тика
-            if (Statistic.getCurrentTick().get() == animal.getLastProcessedTick()) {
+            if (Statistic.getCurrentTick().get() == animal.getLastProcessedTick().get()) {
                 continue;
             }
             //переместили
             island.relocate(animal);
-            animal.setLastProcessedTick(Statistic.getCurrentTick().get());
+            animal.getLastProcessedTick().set(Statistic.getCurrentTick().get());
         }
     }
 
@@ -151,7 +158,7 @@ public class LocationTask implements Callable<Void> {
 
     //метод симуляции тика
     private void runTick() {
-        for (int i = startRow; i < endRow; i++) {
+        for (int i = startRow; i <= endRow; i++) {
             for (int j = 0; j < island.getLocations()[i].length; j++) {
                 lifeCycle(island.getLocations()[i][j]);
             }

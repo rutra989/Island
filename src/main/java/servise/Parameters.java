@@ -13,7 +13,7 @@ public class Parameters {
     private int lengthSize = 10; //длина массива
     private int heightSize = 10; // ширина массива
     private int tickDuration = 3; // длительность такта симуляции
-    private int numberOfThreads = 1; // количество потоков
+    private int numberOfThreads = 5; // количество потоков
 
     private boolean stopCondition = true; // условие остановки симуляции
     private Map<AnimalType, Integer> countAnimals = new HashMap<>(); // начальное кол-во животных;

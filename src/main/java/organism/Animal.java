@@ -5,6 +5,7 @@ import lombok.Getter;
 import lombok.Setter;
 
 import java.util.concurrent.CopyOnWriteArrayList;
+import java.util.concurrent.atomic.AtomicLong;
 
 @Getter
 @Setter
@@ -12,8 +13,8 @@ public abstract class Animal extends Organism{
 
     private int x; //местоположение животных
     private int y;
-    private long lastProcessedTick; // защита от повторной обработки
-    private long lastReproduceTick; // защита от повторного размножения
+    private AtomicLong lastProcessedTick = new AtomicLong(0); // защита от повторной обработки
+    private AtomicLong  lastReproduceTick = new AtomicLong(-1); // защита от повторного размножения
 
     public Animal(int x, int y, AnimalType animalType) {
         super(animalType);
