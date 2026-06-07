@@ -24,7 +24,7 @@ public class AnimalFactory {
             case MOUSE -> new Mouse(x, y);
             case RABBIT -> new Rabbit(x, y);
             case SHEEP -> new Sheep(x, y);
-            case CATERPILLAR -> new Сaterpillar(x, y);
+            case CATERPILLAR -> new Caterpillar(x, y);
         };
 
     }

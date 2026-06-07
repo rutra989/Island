@@ -6,6 +6,7 @@ import organism.Animal;
 import organism.AnimalType;
 import organism.Plants;
 
+import java.util.concurrent.ConcurrentHashMap;
 import java.util.concurrent.CopyOnWriteArrayList;
 
 @Setter
@@ -16,6 +17,7 @@ public class Location {
     private int y;
     private CopyOnWriteArrayList<Animal> animals = new CopyOnWriteArrayList<>();
     private CopyOnWriteArrayList<Plants> plants = new CopyOnWriteArrayList<>();
+    private ConcurrentHashMap<AnimalType, Integer> bornThisTick = new ConcurrentHashMap<>();// список для подсчета рожденных объектов
 
     //конструктор осоздания объекта по координатам
     public Location(int x, int y) {
@@ -60,5 +62,10 @@ public class Location {
     // удаление растений
     public synchronized void removePlants(Plants plant) {
         plants.remove(plant);
+    }
+
+    //метод сброса счетчика рождаемости
+    public void resetBornThisTick(){
+        bornThisTick.clear();
     }
 }

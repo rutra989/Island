@@ -3,8 +3,10 @@ package island;
 import lombok.Getter;
 import lombok.Setter;
 import organism.Animal;
+import organism.AnimalType;
 import organism.Organism;
 import organism.Plants;
+import servise.Parameters;
 import servise.Statistic;
 
 import java.util.concurrent.Callable;
@@ -24,8 +26,13 @@ public class LocationTask implements Callable<Void> {
     }
 
     @Override
-    public Void call() throws Exception {
-        runTick();
+    public Void call(){
+        try {
+            runTick();
+        }catch (Exception e){
+            System.out.println("Ошибка в LocationTask: " + e.getMessage());
+            e.printStackTrace();
+        }
         return null;
     }
 
@@ -42,8 +49,9 @@ public class LocationTask implements Callable<Void> {
             }
             // ищем жертву - это может быть и растение
             for (Organism prey : predator.getFoodList(location)) {
-                predator.eat(prey);
-                    break;
+               if( predator.eat(prey)) {
+                   break;
+               }
             }
                 predator.tickHunger();
         }
@@ -52,17 +60,25 @@ public class LocationTask implements Callable<Void> {
     // метод симуляции рождения
     private void runReproduce(Location location) {
         for (Animal animal : location.getAnimals()) {
-            // проверяем есть ли место и не участвовало ли животное в размножении
-            if (Statistic.getCurrentTick().get() == animal.getLastReproduceTick() || !location.hasSpace(animal.getAnimalType())) {
+            AnimalType type = animal.getAnimalType(); // получаем тип животного
+            int born =  location.getBornThisTick().getOrDefault(type, 0); // получаем количество рожденных животных
+            int limit = Parameters.getInstance().getNumberCubs().get(type); //получаем установленный лимит на новорожденных
+            // проверяем есть ли место, не участвовало ли животное в размножении, и не превышен ли лимит на новорожденных
+            if (Statistic.getCurrentTick().get() == animal.getLastReproduceTick() ||
+                    !location.hasSpace(type) || born >= limit) {
                 continue;
             }
+            //  подбираем партнера
             for (Animal partner : location.getAnimals()) {
                 // проверка на самого себя
                 if (animal == partner) {
                     continue;
                 }
                 //если партнеры совпадают по типу - размножение
-                if (animal.getAnimalType() == partner.getAnimalType()) {
+                if (type == partner.getAnimalType()) {
+                    // инкриментируем новорожденного в bornThisTick
+                    location.getBornThisTick().put(type, location.getBornThisTick().getOrDefault(type, 0) + 1);
+                    // процесс рождения
                     Animal newborn = animal.reproduction();
                     newborn.setLastReproduceTick(Statistic.getCurrentTick().get());
                     location.addAnimal(newborn);
@@ -125,6 +141,7 @@ public class LocationTask implements Callable<Void> {
 
     //метод запуска жизни в клетке
     private void lifeCycle(Location location) {
+        location.resetBornThisTick();
         runEat(location);
         runDead(location);
         runReproduce(location);

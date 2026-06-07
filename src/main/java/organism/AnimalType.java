@@ -47,5 +47,8 @@ public enum AnimalType {
         probabilityOfEating.put(FOX, Map.of(RABBIT, 70, MOUSE, 90, DUCK,60, CATERPILLAR, 40));
         probabilityOfEating.put(WOLF,Map.of(HORSE,10, DEER, 15, RABBIT,60,MOUSE,80, GOAT,60,SHEEP,70,
                 HOG,15,BUFFALO,10,DUCK,40));
+        probabilityOfEating.put(DUCK,Map.of(CATERPILLAR,90));
+        probabilityOfEating.put(HOG,Map.of(CATERPILLAR,90, MOUSE, 50));
+        probabilityOfEating.put(MOUSE,Map.of(CATERPILLAR,90));
     }
     }
