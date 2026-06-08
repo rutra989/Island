@@ -30,7 +30,7 @@ public class Simulation {
     }
 
     //метод получения списка задач
-    public void task() {
+    private void task() {
         int range = parameters.getLengthSize() / parameters.getNumberOfThreads(); // определяем диапазон работы потоков
         int startRow = 0;
         // создаем список задач распределяя ответственность потоков по диапазону. каждый действует в своем диапазоне острова
@@ -65,7 +65,7 @@ public class Simulation {
     }
 
     // условие остановки симуляции
-    public boolean stop() {
+    private boolean stop() {
         if (Statistic.getCurrentTick().get() >= parameters.getMaxTicks() || Statistic.getTotal().get() == 0) {
             scheduler.shutdown();
             threadPool.shutdown();
