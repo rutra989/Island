@@ -66,6 +66,11 @@ public class Simulation {
 
     // условие остановки симуляции
     public boolean stop() {
-        return Statistic.getCurrentTick().get() >= parameters.getMaxTicks() || Statistic.getTotal().get() == 0;
+        if (Statistic.getCurrentTick().get() >= parameters.getMaxTicks() || Statistic.getTotal().get() == 0) {
+            scheduler.shutdown();
+            threadPool.shutdown();
+            return true;
+        }
+        return false;
     }
 }

@@ -23,37 +23,37 @@ public class Parameters {
 
     private Parameters() {
         // Закинем стартовое количество животных
-        countAnimals.put(AnimalType.BEAR, 10);
-        countAnimals.put(AnimalType.BOA_SNAKE, 10);
-        countAnimals.put(AnimalType.EAGLE, 10);
-        countAnimals.put(AnimalType.FOX, 10);
-        countAnimals.put(AnimalType.WOLF,10);
-        countAnimals.put(AnimalType.BUFFALO,10);
-        countAnimals.put(AnimalType.CATERPILLAR,10);
-        countAnimals.put(AnimalType.DEER,10);
-        countAnimals.put(AnimalType.DUCK,10);
-        countAnimals.put(AnimalType.GOAT,10);
-        countAnimals.put(AnimalType.HOG,10);
-        countAnimals.put(AnimalType.HORSE,10);
-        countAnimals.put(AnimalType.MOUSE,10);
-        countAnimals.put(AnimalType.RABBIT,10);
-        countAnimals.put(AnimalType.SHEEP,10);
+        countAnimals.put(AnimalType.BEAR, 5);
+        countAnimals.put(AnimalType.BOA_SNAKE, 5);
+        countAnimals.put(AnimalType.EAGLE, 5);
+        countAnimals.put(AnimalType.FOX, 5);
+        countAnimals.put(AnimalType.WOLF,5);
+        countAnimals.put(AnimalType.BUFFALO,5);
+        countAnimals.put(AnimalType.CATERPILLAR,5);
+        countAnimals.put(AnimalType.DEER,5);
+        countAnimals.put(AnimalType.DUCK,5);
+        countAnimals.put(AnimalType.GOAT,5);
+        countAnimals.put(AnimalType.HOG,5);
+        countAnimals.put(AnimalType.HORSE,5);
+        countAnimals.put(AnimalType.MOUSE,5);
+        countAnimals.put(AnimalType.RABBIT,5);
+        countAnimals.put(AnimalType.SHEEP,5);
         // ограничим количество новорожденных в клетке
-        numberCubs.put(AnimalType.BEAR, 10);
-        numberCubs.put(AnimalType.BOA_SNAKE, 10);
-        numberCubs.put(AnimalType.EAGLE, 10);
-        numberCubs.put(AnimalType.FOX, 10);
-        numberCubs.put(AnimalType.WOLF, 10);
-        numberCubs.put(AnimalType.BUFFALO, 10);
-        numberCubs.put(AnimalType.CATERPILLAR, 10);
-        numberCubs.put(AnimalType.DEER, 10);
-        numberCubs.put(AnimalType.DUCK, 15);
-        numberCubs.put(AnimalType.GOAT, 15);
-        numberCubs.put(AnimalType.HOG, 15);
-        numberCubs.put(AnimalType.HORSE, 10);
-        numberCubs.put(AnimalType.MOUSE, 20);
-        numberCubs.put(AnimalType.RABBIT, 15);
-        numberCubs.put(AnimalType.SHEEP, 15);
+        numberCubs.put(AnimalType.BEAR, 2);
+        numberCubs.put(AnimalType.BOA_SNAKE, 2);
+        numberCubs.put(AnimalType.EAGLE, 2);
+        numberCubs.put(AnimalType.FOX, 2);
+        numberCubs.put(AnimalType.WOLF, 2);
+        numberCubs.put(AnimalType.BUFFALO, 2);
+        numberCubs.put(AnimalType.CATERPILLAR, 2);
+        numberCubs.put(AnimalType.DEER, 2);
+        numberCubs.put(AnimalType.DUCK, 2);
+        numberCubs.put(AnimalType.GOAT, 2);
+        numberCubs.put(AnimalType.HOG, 2);
+        numberCubs.put(AnimalType.HORSE, 2);
+        numberCubs.put(AnimalType.MOUSE, 2);
+        numberCubs.put(AnimalType.RABBIT, 2);
+        numberCubs.put(AnimalType.SHEEP, 2);
     }
     //    создаем объект Parameters в единственном экземпляре паттерн Синглтон
     public static Parameters getInstance() {
